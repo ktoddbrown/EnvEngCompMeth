@@ -1,3 +1,10 @@
+#bookdown files
+_bookdown_files/*
+
+#Mac folder orgs
+.DS_Store
+
+#Rstudio files
 *.Rproj
 
 # History files

@@ -1,0 +1,113 @@
+---
+title: "Computational Methods Style Guide"
+author: "K Todd-Brown (ktoddbrown@gmail.com)"
+date: "2/2/2020"
+output: html_document
+---
+
+# Style Guide
+Writing code is not just to give instructions to a computer.
+It's also to document your analysis for future users (often yourself!).
+Code can be perfectly fine syntatically and absolutely impossible to read as a human.
+You should strive for code that both executes AND is human readable.
+
+To help people read code there are certain styles conventions that have emerged.
+In R the tidyverse-conventions are fairly popular in the R community: Wickham, H. "Tidyverse style guide". (2020) [https://style.tidyverse.org/](https://style.tidyverse.org/).
+
+## File names
+
+File names that are R-scripts should be meaningful and end in .R. Files that are markdown should end in .Rmd. Avoid using special characters and spaces in file names - stick with numbers, letters, and _.
+
+## Variable and function names
+
+Variable and function names should use only letters, numbers, and _.
+Use underscores (_) (so called snake case) to separate words within a name or upperAndLower cases (so called camel case). 
+Variable names should start with a lower case letter.
+
+Generally, variable names should be nouns and function names should be verbs. 
+Strive for names that are concise and meaningful (this is not easy!).
+
+Where possible, avoid re-using names of common functions and variables. 
+This will cause confusion for the readers of your code.
+
+## Comments
+
+Comments should explain what a line of code does and/or why we want to do this.
+Comments should be a balance of complete and brief, though for this class err on the side of verbose.
+Comments that explain groups of lines or entire functions should be complete sentences and on their own line.
+Comments that explain groups of lines should be preceded by a blank line and the relevant code should be followed by a blank line
+
+```{r eval=FALSE}
+z <- 0
+
+#This is an multiline example, that explains we are going to do something to x.
+x <- 0
+x <- x*8
+x <- x/1
+
+y <- 14
+```
+
+Comments that expline single lines of code may appear after that line and can be incomplete sentences. 
+Single line comments may also precede the code, but if they do they should be treated as comments on multiline code (see above).
+
+```{r eval=FALSE}
+x <- x + 3 #add the measurement offset to x
+
+#Below we add the measurement offset to y.
+y <- y + 3
+
+z <- mean(x, y)
+```
+
+## Functions
+
+All functions should explicitly specify a return value.
+
+## Indentation
+
+Lines of code inside of { } should be indented. 
+A line inside multiple { } should be indented once per { }.
+
+```{r eval=FALSE}
+doSomething <- function(x, y){
+  x <- x * 3.1415926
+  
+  if(y < 0){
+    y <- abs(y * x)
+  }
+  
+  return(y * x)
+}
+```
+
+## Line breaks
+
+Lines that are longer then very long  (>80-characters) should be broken up if possible.
+If a line breaks up a function, the arguments of that function should align.
+
+```{r eval = FALSE}
+do_something(argument1 = 1,
+             argument2 = 'as I said earlier',
+             argument3 = c(1,2,3,4,5))
+```
+
+## Whitespace
+
+In general whitespace is used to make code easier to read.
+Group lines of code that do something similar with an empty line (and maybe add a comment to the top).
+
+Use tabs and spaces to indendent commands inside { }.
+
+## Rmarkdown documents
+
+Rmd documents should use a single \# for a main header and multiple \# for subheaders.
+
+> Problem statements should be block quoted using \>
+
+And the responses to the problems should appear below in plain text.
+
+```{StyleChangeLog, block='note'}
+###---Style Guide Change Log---###
+Feb 2, 2020 - inital draft
+```

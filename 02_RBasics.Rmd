@@ -1,0 +1,393 @@
+
+# Basic programming in R
+
+
+We are using [R](https://www.r-project.org/) to develope our data workflows.
+R is a powerful opensource tool that will allow you to manipulate data and simulations in a way that is traceable and reproducable.
+
+R is not a general purpose programing language.
+R is not for production code, it's been known to develop instabilities with large userbases. 
+If your data is so large that you can not load it into memory, you probably do not want to use R.
+R is not a 'fast' language, in general well optimized C++ or Fortran code will run faster then R.
+
+R is a [Turing complete](https://en.wikipedia.org/wiki/Turing_completeness) programming language.
+Designed to run statistical test orginally, R creates high quality graphics and visulaizations.
+R is a common choice for people who need a programming language to run statistical computing and visualizations, but it is not the only laugage out there.
+Python is a more general purpose language that has been expanding it's graphical capiblities.
+Matlab is a common choice in engineering due to it's differental equation solvers.
+
+In the end R, Python, and Matlab can all be used in data analysis and you should use the language that is most prevolent in your community.
+For this class we are sticking with R.
+
+## R console, R-scripts, and Rmarkdown
+
+When you first open R markdown you will see three panels.
+On your left you will see a panel called 'Console', with several tabs under it. 
+The upper right will have a panel called 'Environment', with several other tabs. 
+And the lower right will have a panel called 'Files', with several tabs under it.
+
+[[TODO fill in RStudio walk through]]
+
+## Folder organization
+
+In general your files on your computer should be organized in some way that helps you find things.
+One thing that many people find useful is to seperate their personal and professional files into two top level directories.
+```
+~
+|- Personal
+  |- Photos
+  |- Money
+     |- Taxes
+     |- Reciepts
+|- Professional
+  |- 2020SpringClasses
+     |- ComputationalMethods
+     |- Notes
+     |- Homework
+        |- Homework01
+     |- Labs
+  |- OldClasses
+```
+If your files don't look like this that's ok. How you organize your computer is a very personal decision and you will probably change this multiple times over your life, but you should organize it in some way.
+
+Directories like `Downloads` or `Temp` are designed for temporary storage and should not be a permanent home for your files.
+Especially with `Temp` directories, your operating sytem or other programs on your computer could delete the files in these diretories to free up space!
+
+For this class each assignment should be in it's own folder.
+This assignment folder should be zip-ed and submitted as a single upload to the course website.
+You should point a new Rproject session to that folder to ensure that the working directory of your Rmarkdown documents matches that of your Console.
+Each assignment folder should have two daughter folders: `R/` and `data/`. All `*.R` files should go in the `R/` folder and all data files (typically `*.csv`) should go in the `data/` file.
+Each assignment should have a single primary Rmarkdown document that should be located at the top level of the assignment folder as well as it's knit-ed html.
+
+For example, homework 1's folder might look something like this:
+```
+Homework01
+|-Homework01.html
+|-Homework01.Rmd
+|-Homework01.Rproj
+|-data
+  |-exampleData01.csv
+  |-exampleData02.csv
+|-R
+  |-helloWorld.R
+```
+
+## Data types
+
+R has three basic data types: logical, numeric, and character.
+Functions are also treated by R as a fundimental data type but we will talk about them later.
+All numbers and characters in digital computers are reprented as a series of 1's and 0's or `TRUE`'s and `FALSE`'s using binary numbers which are logical data types.
+We'll talk more about this connection in another section.
+
+### Logical data types
+
+Logical data types or booleans are the most basic and are either `TRUE` or `FALSE`. 
+These data types are used extenstively to index arrays and lists as well as in if-statements. 
+A Logical data type is the foundation for digital computing. 
+At their most basic every datum in a computer is represented as a series of `TRUE` and `FALSE`.
+
+Logical values can be manipulated using boolean operations that include `not` (`!`), `and` (`&`), as well as `or` (`|`).
+These behave about as you would expect them to:
+```{r}
+#not
+!TRUE
+!FALSE
+
+#and
+TRUE & TRUE
+TRUE & FALSE
+
+#or
+TRUE | TRUE
+TRUE | FALSE
+
+#idenity
+TRUE == TRUE
+FALSE == TRUE
+FALSE == FALSE
+```
+
+They can also behave as numerical values where `FALSE` evaluates to 0 and `TRUE` evaluates to 1 or greater then 0.
+```{r}
+TRUE + TRUE
+FALSE * TRUE
+```
+Notice that the `class` of this changes when you force them to act as numerical values
+```{r}
+class(TRUE)
+class(TRUE+TRUE)
+```
+
+
+### Numerical data types
+
+Numerical data types are numbers. These can be whole numbers, also called `integers`, like `1` or decimal numbers like `2.3`. If you've worked in other programming languages you might recall that integers and doubles or floats behave very differently, but R treats them all as numerics and will generally like any calculator that you've used.
+```{r}
+#addition
+1+2
+#multiplication
+3*4
+#subtraction
+5-8
+#division
+5/3
+#exponent
+3^2
+#log (base e)
+log(2)
+#e^x
+exp(2)
+```
+
+### Characters
+
+`character` is the final fundimental data type in R. 
+These include both alphanumerics like `12ad` but also special chactures like `$#@_`.
+Characters in R are defined using a set of single ('') or double quotes (""). 
+Since we think of character as a single letter or digit it can be awkward to talk about sets of characters using the `character` but R has no such grammer problems. 
+Internally R does not care if it is a single letter or a copy of the Declaration of Independence, they are both `character` data types.
+Us poor humans are left plurizing a set of characters as either 'characters' or 'strings', but this is a reflection on our grammer not how they are represented by R.
+
+Characters can be pushed together using the function `paste`. 
+R also has a robust regular expression library which can match specified character patterns, sort of like a generalized search function in a text editor.
+
+```{r}
+#a character example
+'hi!'
+#making a single character string
+paste("hello", 'world')
+#subsetting a string
+substr('Hello world!', start = 1, stop = 5)
+#cryptic preview of a regular expression
+grepl('\\d', '1231')
+```
+
+## Notation
+
+### Infix notation {#sect_infix}
+### Postfix notation
+### Prefix notation
+
+## Variables
+
+In addition to using the console like a calcuator we can store the results in variables (similar to objects in other langauges).
+We don't have to do anything before hand to formally initalize the variable and R has no problem switching data types that are stored in a variable.
+This is called a 'weakly typed' language and is generally not considered a good thing because it means sometimes variables are not what you expect them to be.
+But generally, for short analysis, this is not a huge issue for us. 
+
+The assignment operator '<-' is used to assign the value `2` to the varaible `a` below. 
+Note that R will do this silently without giving you any output to the console window unless it runs into trouble.
+
+```{r}
+a <- 2
+a
+```
+
+When you call a variable like `a + 3` the variable is not modified unless you explicitly assign the output of that operator back to the variable.
+For example
+```{r}
+a <- 2
+a + 3
+a
+a <- a + 3
+a
+```
+
+Variable names must start with an alphabet character but can contain numbers or `_`. 
+They can not contain other special characters like `.*^&!@`.
+There are several guideline other about what makes a good variable name and you should read the class style guide to find out what is expected in this class!
+
+### A brief history of the assignment operator
+
+Why the funky assigment operator '<-', why not just use '='?
+
+I'm glad you asked! The answer is mostly historical reasons at this point.
+First programming languages are almost never created from nothing, they are almost all modifications of pervious programming languages.
+R was developed from S which was developed from several languages including APL.
+APL was developed to be used with a very specific keyboard that had a dedicated arrow key to produce '<-'.
+So when '<-' was proposed it was no more key strokes then using any other character.
+
+So why not `=`? 
+
+Well, `=` was being used for testing equivalancy in many languages and people didn't want programmers to get confused between testing if two variables were the same value and assigning on value to another.
+Of course R went and used `==` for equivalancy, and enough people complained that eventually `=` was introduced into the lanaguage for assignment later... sort of.
+While `=` will work to assign values to variables it has some very odd side effects that makes it a questional choice in many [cases.](https://renkun.me/2014/01/28/difference-between-assignment-operators-in-r/)
+Instead R typically uses `=` to assign value to input variables in function calls.
+
+Which is not confusing at all... no of course it's confusing!
+What's important to remember for now is that you should use `<-` to assign values to variables, `=` to assing value to function arguments, and be aware that some folks might use `=` to assign values to variables (but you never would!). 
+There are reasons for all of these that has to do with the historical development of R as a programming language that is more detail then we really care about right now.
+
+### Factors
+
+`factors` are integers disguised as characters and can be a pretty nasty surpirse if you aren't expecting them.
+Factors represent categorical variables, for example animals can be either 'reptile' or 'mammal'.
+To save memory space, R has `factors` which assign each category an integer and then will write that integer to memory instead of the character strings.
+Sometimes that means R will treat factors as an integer numeric and sometimes it will treat it as a character.
+Right now you should just be aware that there are these funny things called 'factors' and double check that they are doing what you think they are when you use them.
+
+```{r}
+factor(c('reptile', 'mammal', 'mammal', 'reptile'), levels = c('reptile', 'mammal'))
+factor(c('reptile', 'mammal', 'mammal', 'reptile'), levels = c('mammal', 'reptile'))
+```
+
+## Data structures
+
+There are two primary data structures in R: `arrays` and `list`. 
+Lists however are used as the basis for several other data structures that we will commonly use including `data.frame` and `tibble`
+
+### Arrays
+
+Arrays are ordered groups of the same data type. 
+You can think of these as N-dimentional matrices. 
+
+A vector is a special array that has only one dimention. 
+Vectors are used all the time in R to construct more complicated data structures. 
+You use the `c(...)` to construct a vector and the `:` notation to create a vector of sequential numbers.
+In general, any operation you apply to a data type is applied element by element to an array of that data type
+```{r}
+myVector <- c(1, 3, 4, 1)
+myVector
+myVector + 1
+1:5
+```
+
+To create an array you need to pass the `array` function the values you are populating the array with and the dimentions of the array. Note that the array is populated by row first and then by column.
+```{r}
+array(c(1,3,5,7), dim=c(2,2))
+```
+
+### Lists
+
+A list is a named group of data types that do not have to be the same.
+While a list can be unnamed, it is generally a bad idea. 
+You can also have a list of lists.
+As a general rule you can not apply operations expecting a specific data type to a list object.
+You can get or set the names of the elemetns of a list using the function `names(...)`.
+Notice that you use `=` to assign names to each element of a `list`.
+```{r}
+#a list of mixed type, including a list of a list
+list(a=c(1,2), b='cat', d=13, w=list(a='dog', b=c(2,3,4,1)))
+
+data_ls <- list(a=1:4, b='cat')
+data_ls
+names(data_ls)
+names(data_ls) <- c('count', 'animal')
+data_ls
+```
+
+### data.frame
+
+A `data.frame` is a list where each element is the same length. 
+This is very useful in representing data that is in a table form.
+The colums of a `data.frame` are associated with the names.
+```{r}
+data_df <- data.frame(count = c(1,1,2,2,3),
+                      pet = c('farret', 'fish', 'bird', 'dog', 'cat'))
+data_df
+```
+
+## Indexing
+
+Accessing specific parts of a data structure is frequently called indexing.
+
+### Named reference
+
+Lists have names that can be used to access each element.
+```{r}
+data_ls <- list(a=c(1,2), b='cat', d=13, w=list(a='dog', b=c(2,3,4,1)))
+data_ls$a
+data_ls$w
+```
+
+### Square breaket notation
+
+Both lists and arrays can be accessed using a position reference using `[]`.
+```{r}
+data_ls <- list(a=c(1,2), b='cat', d=13, w=list(a='dog', b=c(2,3,4,1)))
+data_ls[1]
+data_ls[2:3]
+myArray <- array(c(1,3,5,7), dim=c(2,2))
+myArray[3]
+myArray[c(1,4)]
+```
+
+A list can be further simplified using `[[]]`.
+It is considered simplified because it will strip away the outside list.
+Unline for the `[]` option, it often doesn't make much sense to use the `[[]]` with more then one index.
+```{r}
+data_ls <- list(a=c(1,2), b='cat', d=13, w=list(a='dog', b=c(2,3,4,1)))
+data_ls[[1]]
+```
+
+Finally multiple demention arrays can also be accessed using a `[,...]` notation. Keep in mind that R is a row first reference.
+You can leave one of the sides of the `,` blank in this usage of the square breaket notation to access all the entries in that dimention.
+```{r}
+myArray <- array(c(1,3,5,7), dim=c(2,2))
+myArray
+#pull the second row, first column.
+myArray[2,1]
+#pull all the rows in column 1
+myArray[,1]
+```
+
+## Functions
+
+Functions are a collection of commands with an input and an output.
+Anytime you find yourself copying code multiple times, that's a pretty good indication that it should be in a function.
+
+```{r}
+#create a funciton
+myFunction <- function(whom){
+  ans <- paste('Hello', whom) #create a new variable using the input whome
+  return(ans) #return the new variable as the output of the function
+}
+
+#call a function
+myFunction(whom = 'world')
+```
+
+There are four main parts of a function declaration: name, inputs, body, and output.
+Let's consider the above function `myFunction`.
+
+We start by assigning a varaiable named `myFunction`, just like assigning a basic data type or data structure you use the assign operator.
+A function is considered a basic data type by R, which makes it a funcitonal programing language (as opposed to object-oriented programming languages where functions are associated with more complicated 'objects').
+
+Next you call the function `function` and specify the inputs to your new function.
+These inputs are essencially promisses.
+You are promissing that you will provide a variable that the function can refer to on execution when you call it.
+
+Then you define the body of the function by enclosing lines of code with a set of curly brackets `{...}`.
+Generally, but not always, the code in the body takes the input promised to the function and does something with it, in this example it adds the word 'Hello' to the start.
+
+Finally, you give the caller of the function the output using the `return` function.
+If you don't specify what a function should return, R will try to guess. 
+This can lead to unexpected behavior so you should specify what your function returns, in this example it's the variable that we created called `ans`.
+
+After you have created a function you can now call it using the function name, followed by an open paren `(`, assigned input values using the `=`, and then a close paren `)`.
+
+### Developing a function
+When you are first developing a function it often makes sense to comment out everything but the body of a function and explicitly define an example input. 
+Below there are two examples of the development version and the final version of the same function.
+Be sure to comment out your development case!
+Otherwise you'll re-assign the input variable to a 'hard coded' value every single time you call the function, something that you almost never want to do!
+```{r}
+####Development phase
+#calcClassGrade <- function(grades_arr){
+  grades_arr <- c(50, 23, 90, 98, 85)
+  #the final grade is the mean of grades less then the min (ie drop the lowest grade)
+  ans <- mean(grades_arr[grades_arr > min(grades_arr)]) 
+  #ans should be 80.75 for the test case
+#  return(ans)
+#}
+  
+####Final phase
+calcClassGrade <- function(grades_arr){
+  #grades_arr <- c(50, 23, 90, 98, 85)
+  #the final grade is the mean of grades less then the min (ie drop the lowest grade)
+  ans <- mean(grades_arr[grades_arr > min(grades_arr)]) 
+  #ans should be 80.75 for the test case
+  return(ans)
+}
+```
+

@@ -1,0 +1,285 @@
+
+# Data cleanning
+
+Data cleaning is the reformating and filtering of data from a 'raw' state to a format where you can preform analysis on it.
+Virtually every dataset you work with will need some form of cleaning.
+
+## File formats
+
+While there are numberous file formats out there, we are going to focus on tabular data file formats (ie data that is delivered in a table or spread sheet). 
+These typically fall into three categories: Excel, comma seperated values and tab seperated values.
+
+### Excel files
+
+Excel files are frequently used as an interface to aquire data. 
+You are probably familar with using Excel to create basic summary statistics, formulas to calculate new values, and create graphs.
+While Excel can be very intitutive it is difficult to get high quality graphics or create complex analysis.
+That being said, the vast majority of data collected is at least initalally stored in Excel files, and R can read these files just fine!
+
+```{r excelReadIn}
+library(readxl) #the library in tidyverse to read in an excel file
+
+data.df <- readxl::read_excel(path = file.path('data', 'PrinceFish', 'Red drum tissue data.xlsx'), #specify the file we are reading
+                              sheet = 1) #specify the sheet we want to read in
+```
+
+One of the major issues with Excel for long term storage of data is that Excel changes their file formats and sometimes data that reads in fine with one version of Excel will not read in well with another.
+In theory Excel is always backwards compatable (new version will read data generated in old versions) but in practice this is not always the case.
+In addition Excel is not free, this means that the data stored in that formate is often not free (but R and other languages can get around this one!).
+
+A much better format to store data in is as flat text file.
+These file formats contain very basic character encodings (ASCII or Unicode) with a proscribed regular structure to seperate the rows and columns.
+Flat text files are an open file format that any of the major operating systems can read.
+Flat text files are also highly stable, while characters have been added to the encoding binary, it is highly unusual for any of these characters to be removed.
+Two of the common file formats are comma seperated values and tab seperated values
+
+### CSV: comma seperated values
+
+In comma seperated value files (*.csv) columns are seperated with commas ',' and rows are seperated by new line or return characters (typically '\\n').
+The data is expected to be regular, meaning that there are the same number of columns (and thus commas) in each row.
+Note that this means the only ',' in this file format are those seperating the columns.
+This can be a problem when file headers or notes in the data are particularlly long and descriptive, it's very common to need a ',' somewhere for correct English.
+
+This can be expecially confusing if you are from Europe.
+European's notate decmals using ',' instead of '.', so `3.1415926` in the US becomes `3,1415926` in the EU.
+This can also make reading tables of csv numbers very confusing if you are expecting the EU convention.
+Often times data from Europe will be in a tabular seperated value format.
+
+### TSV: tab seperated values
+
+In tab seperated values, also known as tab-deliminated values, '*.tsv' a tab character ('\\t') is used to seperate the columns, and rows are seperated by new line or return characters (typically '\\n').
+As with csv files, the data is expected to be regular, meaning that there are the same number of columns (and thus '\\t') in each row.
+Since tabs are rarely used in English grammer, there is less of an issue with header names and other annotations.
+However tabs read as whitespace in a file editor, making it very easy to drop a column seperator when handling the data.
+
+So there you go, flat text files are better for archives. 
+If you are American you are probably going to use ',' to seperate the columns, while Eupeans are much more likely to use tabs.
+Pick a side but know the context!
+
+## Tidyverse
+
+Tidyverse is a library of libraries. 
+What makes tidyverse different from other libraries, and particuarlly useful for us, is this collection of libraries is particarlly focused on data cleaning.
+There is also a syntactic shift in how functions are handled in piping.
+
+### Piping
+
+Pipes in R are denoted using `%>%` and are in the `magrittr` library of the `tidyverse`. 
+This [infix notation](#sect_infix) takes the output from the left hand side function and passes it as the input to the first argument on the right hand side function.
+This allows you to break up long nested functions and construct data analysis pipelines incramentally.
+In general, your first line will be a data frame in most piping sequences.
+
+```{r pipingExample}
+library(magrittr)
+
+#A trivial example
+data.df[,4:5] %>%
+  summary()
+
+#...is the same as...
+summary(data.df[,4:5])
+```
+
+### Mutate, select, and filter
+
+Just like with base R, there are functions in the `dplyr` library in `tidyverse` that will subset a data frame and create new columns.
+
+#### Mutate
+
+`mutate` creates or modifies a new column in a data frame.
+```{r mutateExample}
+#temp1 is the same as temp2 in this example
+temp1 <- data.frame(myFirst = 1:3, mySecond = 3:1) %>%
+  mutate(myProduct = myFirst/mySecond)
+
+temp2 <- data.frame(myFirst = 1:3, mySecond = 3:1) 
+temp2$myProduct <- temp2$myFirst/temp2$mySecond
+```
+
+You do not refure to the columns of the data frame with the `$` notation when you are inside a tidyverse function.
+The function will evaluate within the context of the parent data frame, so you just need to refer to it by column name.
+When we talk about the `group_by` function next this will become clear why this is a bad idea.
+
+Take a moment and think about why the following does not run.
+```{r eval=FALSE}
+##does not run
+temp1 <- data.frame(myFirst = 1:3) %>%
+  mutate(myProduct = myFirst/mySecond,
+         mySecond = 3:1) 
+
+#does run but is a bad idea
+temp2 <- data.frame(myFirst = 1:3) %>%
+  mutate(mySecond = 3:1,
+         myProduct = myFirst/mySecond)
+```
+
+The mutate function in temp1 calls on a column before it is created!
+Just like you can't refer to a variable becore you initalize it, you can not use a column until it's created.
+While temp2 will technically run, it's a bad idea to both create/modify and use a function in the same mutate call.
+
+#### Select
+
+`select` returns specified columns.
+```{r}
+temp1 <- data.frame(myFirst = 1:3, mySecond = 3:1) %>%
+  mutate(myProduct = myFirst/mySecond) %>%
+  select(mySecond, myProduct)
+
+temp2 <- data.frame(myFirst = 1:3, mySecond = 3:1) 
+temp2$myProduct <- temp2$myFirst/temp2$mySecond #similar to mutate
+temp2 <- temp2[,c('mySecond', 'myProduct')] #similar to select
+```
+
+Select is useful primarily because it's difficult to chain the square bracket column select notations.
+You can also use pattern matching to select columns with names that match particular patterns. 
+See `?dplyr::select` for more details.
+
+#### Filter
+
+`filter` will only return rows that match specific criteria.
+```{r}
+temp1 <- data.frame(myFirst = 1:3, mySecond = 3:1) %>%
+  mutate(myProduct = myFirst/mySecond) %>%
+  select(mySecond, myProduct) %>%
+  filter(mySecond == 0)
+
+temp2 <- data.frame(myFirst = 1:3, mySecond = 3:1) 
+temp2$myProduct <- temp2$myFirst/temp2$mySecond #similar to mutate
+temp2 <- temp2[,c('mySecond', 'myProduct')] #similar to select
+temp2 <- temp2[temp2$mySecond == 0] #similar to filter
+```
+
+Filter will accept multiple arguments and treat them as an 'and' statement.
+
+### Group by and summarize
+
+Often in an analysis we want to know the summary statistics are between groups within the data.
+For example, if we want to count the number of fish of each sex in our Excel data file.
+We first need to declare what our groups are using `group_by`
+
+```{r}
+data.df <- read_excel(path = file.path('data', 'PrinceFish', 'Red drum tissue data.xlsx'), #specify the file we are reading
+                              sheet = 1) #specify the sheet we want to read in
+str(data.df)
+
+data.df <- data.df %>%
+  group_by(`Sex (females are post spawn)`) #note the 'funny' single back ticks to refer to the column name
+                                           #we have to do this because the column names have spaces and other special characters in them.
+str(data.df)
+```
+
+Note that `group_by` didn't chance any of the values in the data frame.
+Instead it create a new attribute called "groups" that reflected the column 'Sex (females are post spawn)'.
+To get the average across this grouping you need to call the function `summerize`
+
+```{r}
+data.df <- read_excel(path = file.path('data', 'PrinceFish', 'Red drum tissue data.xlsx'), #specify the file we are reading
+                              sheet = 1) %>%
+  group_by(`Sex (females are post spawn)`) %>%
+  summarize(meanWeight = mean(`Total Fish Weight (lbs)`),
+            meanAge = mean(`Age (years)`))
+
+data.df
+```
+
+### Wide to long and back again (pivot_longer vs pivot_wider)
+
+In general there are two common ways to structure a data table: wide and long.
+
+Wide data has one row for each sample and several columns for each measurement.
+This is probably very similar to what you've worked with in the past when you've taken multiple measurements of a simple sample or site.
+This format is very easy for humans to interact with a cross check values during data entry.
+
+Below is an example of a wide data format
+
+site | MAT | MAP 
+-----|-----|----
+Gainesville, FL | 68.7 | 52.0
+Lewiston, ME | 45.1 | 44.9
+Richland, WA | 52.9 | 7.6
+Irvine, CA | 63.5 | 14.4
+
+A long data formate has one row for each measurement or observation.
+This formate is easier for computers to aggregate and manipuate (think about how you wuold apply `group_by` to calculate the overall mean of the MAT).
+You will rarely see this format for human entry.
+
+Below is the same data in a long data format
+
+site | variable | value 
+-----|-----|----
+Gainesville, FL | MAT | 68.7 
+Gainesville, FL | MAP | 52.0
+Lewiston, ME | MAT | 45.1 
+Lewiston, ME | MAP | 45.1
+Richland, WA | MAT | 52.9 
+Richland, WA | MAP | 7.6
+Irvine, CA | MAT | 63.5
+Irvine, CA | MAP| 14.4
+
+In both formates there is usual a small set of columns that identify what is being measured and a second set of columns associated with the measurements themselves.
+The columns that are associated with the identify of the object of interest are often called the 'id' columns, and in the above example this is the `site` column.
+
+We can move between the wide and long formats using the pivot functions.
+```{r}
+climateData <- tibble::tribble(~site, ~MAT , ~MAP ,
+                               'Gainesville, FL' , 68.7 , 52.0,
+                               'Lewiston, ME' , 45.1 , 44.9,
+                               'Richland, WA' , 52.9 , 7.6,
+                               'Irvine, CA', 63.5 , 14.4) #tribble is a useful way to code in data by row
+
+climateData
+
+climateData_long <- climateData %>%
+  pivot_longer(cols=c('MAT', 'MAP'))
+
+climateData_long
+
+climateData_wide <- climateData_long %>%
+  pivot_wider(id_cols = 'site')
+
+climateData_wide
+```
+
+
+
+# Visualization
+
+Part of the `tidyverse` is the package `ggplot2` which has so improved plots in R that we aren't even going to talk about the basic ploting functions and will skip straight to using this package.
+
+In `ggplot` you start with creating a plot object associated with a specific data set.
+```{r}
+climateData <- tibble::tribble(~site, ~MAT , ~MAP ,
+                               'Gainesville, FL' , 68.7 , 52.0,
+                               'Lewiston, ME' , 45.1 , 44.9,
+                               'Richland, WA' , 52.9 , 7.6,
+                               'Irvine, CA', 63.5 , 14.4) %>%
+  pivot_longer(cols=c('MAT', 'MAP'))
+
+ggplot(data = climateData)
+```
+
+This creates an empty plot. 
+You then need to add different geometries that are mapped using asthetics to the data you used to create the object.
+In this case we are creating a histogram.
+
+```{r}
+ggplot(data = climateData) +
+  geom_histogram(mapping = aes(x = value))
+```
+
+But for our data that histogram spans two different measurements MAT and MAP.
+So we can wrap that in a facet to create subplots.
+
+```{r}
+ggplot(data = climateData) +
+  geom_histogram(mapping = aes(x = value)) +
+  facet_wrap(~name)
+```
+
+We can also do scatter plots
+
+```{r}
+ggplot(data = climateData) +
+  geom_point(mapping = aes(x=site, y=value)) +
+  facet_wrap(~name, nrow=2)
+```

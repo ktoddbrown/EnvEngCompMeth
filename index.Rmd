@@ -1,0 +1,26 @@
+---
+title: "Computational Methods for Environmental Engineers - Course Notes"
+author: "K Todd-Brown (ktoddbrown@ufl.edu)"
+date: "9/28/2020"
+site: "bookdown::bookdown_site"
+output:
+  bookdown::gitbook: default
+documentclass: book
+---
+
+# Why do we care about computational methods? {-}
+
+Computational methods could be one of the most useful courses you have ever taken.
+As an engineer, scientist or technical staff, you will probably have to collect and/or analyize data then use this to support decisions that will affect your clients and community.
+The skills in this class will help you do this in a way that is transparent and reproducable. 
+
+We are going to focus on two things this semester 1) data cleaning and visualization, and 2) developing numerical models.
+Historically computational methods has focused on algorithms to solve numerical integration and optimization problems. 
+We will do some of this over the course of the semester but in practice many of you will never actually need to write a forward-difference solver, instead relying on libraries and packages that are already developed.
+This historically approach also ignores the new developments in data analysis workflows that have relatively recently come into common practice.
+
+```{r setup}
+library(tidyverse) # clean up data and plot stuff in 04_tidyverse.Rmd
+library(DiagrammeR) #draw box and flow diagrams in 10_models.Rmd
+library(deSolve) #ODE solver for numerical models
+```
