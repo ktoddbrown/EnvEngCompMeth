@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>1 Basic programming in R | Computational Methods for Environmental Engineers - Course Notes</title>
+  <meta name="description" content="1 Basic programming in R | Computational Methods for Environmental Engineers - Course Notes" />
+  <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="1 Basic programming in R | Computational Methods for Environmental Engineers - Course Notes" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="1 Basic programming in R | Computational Methods for Environmental Engineers - Course Notes" />
+  
+  
+  
+
+<meta name="author" content="K Todd-Brown (ktoddbrown@ufl.edu)" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="r-and-rstudio-set-up.html"/>
+<link rel="next" href="style-guide.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Why do we care about computational methods?</a></li>
+<li class="chapter" data-level="" data-path="r-and-rstudio-set-up.html"><a href="r-and-rstudio-set-up.html"><i class="fa fa-check"></i>R and RStudio set up</a><ul>
+<li class="chapter" data-level="0.1" data-path="r-and-rstudio-set-up.html"><a href="r-and-rstudio-set-up.html#windows-install"><i class="fa fa-check"></i><b>0.1</b> Windows install</a></li>
+<li class="chapter" data-level="0.2" data-path="r-and-rstudio-set-up.html"><a href="r-and-rstudio-set-up.html#macos-install"><i class="fa fa-check"></i><b>0.2</b> macOS install</a></li>
+<li class="chapter" data-level="0.3" data-path="r-and-rstudio-set-up.html"><a href="r-and-rstudio-set-up.html#linux"><i class="fa fa-check"></i><b>0.3</b> Linux</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html"><i class="fa fa-check"></i><b>1</b> Basic programming in R</a><ul>
+<li class="chapter" data-level="1.1" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#r-console-r-scripts-and-rmarkdown"><i class="fa fa-check"></i><b>1.1</b> R console, R-scripts, and Rmarkdown</a></li>
+<li class="chapter" data-level="1.2" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#folder-organization"><i class="fa fa-check"></i><b>1.2</b> Folder organization</a></li>
+<li class="chapter" data-level="1.3" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#data-types"><i class="fa fa-check"></i><b>1.3</b> Data types</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#logical-data-types"><i class="fa fa-check"></i><b>1.3.1</b> Logical data types</a></li>
+<li class="chapter" data-level="1.3.2" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#numerical-data-types"><i class="fa fa-check"></i><b>1.3.2</b> Numerical data types</a></li>
+<li class="chapter" data-level="1.3.3" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#characters"><i class="fa fa-check"></i><b>1.3.3</b> Characters</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#notation"><i class="fa fa-check"></i><b>1.4</b> Notation</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#sect_infix"><i class="fa fa-check"></i><b>1.4.1</b> Infix notation</a></li>
+<li class="chapter" data-level="1.4.2" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#postfix-notation"><i class="fa fa-check"></i><b>1.4.2</b> Postfix notation</a></li>
+<li class="chapter" data-level="1.4.3" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#prefix-notation"><i class="fa fa-check"></i><b>1.4.3</b> Prefix notation</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#variables"><i class="fa fa-check"></i><b>1.5</b> Variables</a><ul>
+<li class="chapter" data-level="1.5.1" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#a-brief-history-of-the-assignment-operator"><i class="fa fa-check"></i><b>1.5.1</b> A brief history of the assignment operator</a></li>
+<li class="chapter" data-level="1.5.2" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#factors"><i class="fa fa-check"></i><b>1.5.2</b> Factors</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#data-structures"><i class="fa fa-check"></i><b>1.6</b> Data structures</a><ul>
+<li class="chapter" data-level="1.6.1" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#arrays"><i class="fa fa-check"></i><b>1.6.1</b> Arrays</a></li>
+<li class="chapter" data-level="1.6.2" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#lists"><i class="fa fa-check"></i><b>1.6.2</b> Lists</a></li>
+<li class="chapter" data-level="1.6.3" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#data.frame"><i class="fa fa-check"></i><b>1.6.3</b> data.frame</a></li>
+</ul></li>
+<li class="chapter" data-level="1.7" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#indexing"><i class="fa fa-check"></i><b>1.7</b> Indexing</a><ul>
+<li class="chapter" data-level="1.7.1" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#named-reference"><i class="fa fa-check"></i><b>1.7.1</b> Named reference</a></li>
+<li class="chapter" data-level="1.7.2" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#square-breaket-notation"><i class="fa fa-check"></i><b>1.7.2</b> Square breaket notation</a></li>
+</ul></li>
+<li class="chapter" data-level="1.8" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#functions"><i class="fa fa-check"></i><b>1.8</b> Functions</a><ul>
+<li class="chapter" data-level="1.8.1" data-path="basic-programming-in-r.html"><a href="basic-programming-in-r.html#developing-a-function"><i class="fa fa-check"></i><b>1.8.1</b> Developing a function</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="style-guide.html"><a href="style-guide.html"><i class="fa fa-check"></i><b>2</b> Style Guide</a><ul>
+<li class="chapter" data-level="2.1" data-path="style-guide.html"><a href="style-guide.html#file-names"><i class="fa fa-check"></i><b>2.1</b> File names</a></li>
+<li class="chapter" data-level="2.2" data-path="style-guide.html"><a href="style-guide.html#variable-and-function-names"><i class="fa fa-check"></i><b>2.2</b> Variable and function names</a></li>
+<li class="chapter" data-level="2.3" data-path="style-guide.html"><a href="style-guide.html#comments"><i class="fa fa-check"></i><b>2.3</b> Comments</a></li>
+<li class="chapter" data-level="2.4" data-path="style-guide.html"><a href="style-guide.html#functions-1"><i class="fa fa-check"></i><b>2.4</b> Functions</a></li>
+<li class="chapter" data-level="2.5" data-path="style-guide.html"><a href="style-guide.html#indentation"><i class="fa fa-check"></i><b>2.5</b> Indentation</a></li>
+<li class="chapter" data-level="2.6" data-path="style-guide.html"><a href="style-guide.html#line-breaks"><i class="fa fa-check"></i><b>2.6</b> Line breaks</a></li>
+<li class="chapter" data-level="2.7" data-path="style-guide.html"><a href="style-guide.html#whitespace"><i class="fa fa-check"></i><b>2.7</b> Whitespace</a></li>
+<li class="chapter" data-level="2.8" data-path="style-guide.html"><a href="style-guide.html#rmarkdown-documents"><i class="fa fa-check"></i><b>2.8</b> Rmarkdown documents</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="data-cleanning.html"><a href="data-cleanning.html"><i class="fa fa-check"></i><b>3</b> Data cleanning</a><ul>
+<li class="chapter" data-level="3.1" data-path="data-cleanning.html"><a href="data-cleanning.html#file-formats"><i class="fa fa-check"></i><b>3.1</b> File formats</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="data-cleanning.html"><a href="data-cleanning.html#excel-files"><i class="fa fa-check"></i><b>3.1.1</b> Excel files</a></li>
+<li class="chapter" data-level="3.1.2" data-path="data-cleanning.html"><a href="data-cleanning.html#csv-comma-seperated-values"><i class="fa fa-check"></i><b>3.1.2</b> CSV: comma seperated values</a></li>
+<li class="chapter" data-level="3.1.3" data-path="data-cleanning.html"><a href="data-cleanning.html#tsv-tab-seperated-values"><i class="fa fa-check"></i><b>3.1.3</b> TSV: tab seperated values</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="data-cleanning.html"><a href="data-cleanning.html#tidyverse"><i class="fa fa-check"></i><b>3.2</b> Tidyverse</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="data-cleanning.html"><a href="data-cleanning.html#piping"><i class="fa fa-check"></i><b>3.2.1</b> Piping</a></li>
+<li class="chapter" data-level="3.2.2" data-path="data-cleanning.html"><a href="data-cleanning.html#mutate-select-and-filter"><i class="fa fa-check"></i><b>3.2.2</b> Mutate, select, and filter</a></li>
+<li class="chapter" data-level="3.2.3" data-path="data-cleanning.html"><a href="data-cleanning.html#group-by-and-summarize"><i class="fa fa-check"></i><b>3.2.3</b> Group by and summarize</a></li>
+<li class="chapter" data-level="3.2.4" data-path="data-cleanning.html"><a href="data-cleanning.html#wide-to-long-and-back-again-pivot_longer-vs-pivot_wider"><i class="fa fa-check"></i><b>3.2.4</b> Wide to long and back again (pivot_longer vs pivot_wider)</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="visualization.html"><a href="visualization.html"><i class="fa fa-check"></i><b>4</b> Visualization</a><ul>
+<li class="chapter" data-level="4.1" data-path="visualization.html"><a href="visualization.html#regular-expressions"><i class="fa fa-check"></i><b>4.1</b> Regular expressions</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="visualization.html"><a href="visualization.html#r-regexp"><i class="fa fa-check"></i><b>4.1.1</b> R-regexp</a></li>
+</ul></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Computational Methods for Environmental Engineers - Course Notes</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="basic-programming-in-r" class="section level1">
+<h1><span class="header-section-number">1</span> Basic programming in R</h1>
+<p>We are using <a href="https://www.r-project.org/">R</a> to develope our data workflows.
+R is a powerful opensource tool that will allow you to manipulate data and simulations in a way that is traceable and reproducable.</p>
+<p>R is not a general purpose programing language.
+R is not for production code, it’s been known to develop instabilities with large userbases.
+If your data is so large that you can not load it into memory, you probably do not want to use R.
+R is not a ‘fast’ language, in general well optimized C++ or Fortran code will run faster then R.</p>
+<p>R is a <a href="https://en.wikipedia.org/wiki/Turing_completeness">Turing complete</a> programming language.
+Designed to run statistical test orginally, R creates high quality graphics and visulaizations.
+R is a common choice for people who need a programming language to run statistical computing and visualizations, but it is not the only laugage out there.
+Python is a more general purpose language that has been expanding it’s graphical capiblities.
+Matlab is a common choice in engineering due to it’s differental equation solvers.</p>
+<p>In the end R, Python, and Matlab can all be used in data analysis and you should use the language that is most prevolent in your community.
+For this class we are sticking with R.</p>
+<div id="r-console-r-scripts-and-rmarkdown" class="section level2">
+<h2><span class="header-section-number">1.1</span> R console, R-scripts, and Rmarkdown</h2>
+<p>When you first open R markdown you will see three panels.
+On your left you will see a panel called ‘Console’, with several tabs under it.
+The upper right will have a panel called ‘Environment’, with several other tabs.
+And the lower right will have a panel called ‘Files’, with several tabs under it.</p>
+<p>[[TODO fill in RStudio walk through]]</p>
+</div>
+<div id="folder-organization" class="section level2">
+<h2><span class="header-section-number">1.2</span> Folder organization</h2>
+<p>In general your files on your computer should be organized in some way that helps you find things.
+One thing that many people find useful is to seperate their personal and professional files into two top level directories.</p>
+<pre><code>~
+|- Personal
+  |- Photos
+  |- Money
+     |- Taxes
+     |- Reciepts
+|- Professional
+  |- 2020SpringClasses
+     |- ComputationalMethods
+     |- Notes
+     |- Homework
+        |- Homework01
+     |- Labs
+  |- OldClasses</code></pre>
+<p>If your files don’t look like this that’s ok. How you organize your computer is a very personal decision and you will probably change this multiple times over your life, but you should organize it in some way.</p>
+<p>Directories like <code>Downloads</code> or <code>Temp</code> are designed for temporary storage and should not be a permanent home for your files.
+Especially with <code>Temp</code> directories, your operating sytem or other programs on your computer could delete the files in these diretories to free up space!</p>
+<p>For this class each assignment should be in it’s own folder.
+This assignment folder should be zip-ed and submitted as a single upload to the course website.
+You should point a new Rproject session to that folder to ensure that the working directory of your Rmarkdown documents matches that of your Console.
+Each assignment folder should have two daughter folders: <code>R/</code> and <code>data/</code>. All <code>*.R</code> files should go in the <code>R/</code> folder and all data files (typically <code>*.csv</code>) should go in the <code>data/</code> file.
+Each assignment should have a single primary Rmarkdown document that should be located at the top level of the assignment folder as well as it’s knit-ed html.</p>
+<p>For example, homework 1’s folder might look something like this:</p>
+<pre><code>Homework01
+|-Homework01.html
+|-Homework01.Rmd
+|-Homework01.Rproj
+|-data
+  |-exampleData01.csv
+  |-exampleData02.csv
+|-R
+  |-helloWorld.R</code></pre>
+</div>
+<div id="data-types" class="section level2">
+<h2><span class="header-section-number">1.3</span> Data types</h2>
+<p>R has three basic data types: logical, numeric, and character.
+Functions are also treated by R as a fundimental data type but we will talk about them later.
+All numbers and characters in digital computers are reprented as a series of 1’s and 0’s or <code>TRUE</code>’s and <code>FALSE</code>’s using binary numbers which are logical data types.
+We’ll talk more about this connection in another section.</p>
+<div id="logical-data-types" class="section level3">
+<h3><span class="header-section-number">1.3.1</span> Logical data types</h3>
+<p>Logical data types or booleans are the most basic and are either <code>TRUE</code> or <code>FALSE</code>.
+These data types are used extenstively to index arrays and lists as well as in if-statements.
+A Logical data type is the foundation for digital computing.
+At their most basic every datum in a computer is represented as a series of <code>TRUE</code> and <code>FALSE</code>.</p>
+<p>Logical values can be manipulated using boolean operations that include <code>not</code> (<code>!</code>), <code>and</code> (<code>&amp;</code>), as well as <code>or</code> (<code>|</code>).
+These behave about as you would expect them to:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="co">#not</span></a>
+<a class="sourceLine" id="cb12-2" data-line-number="2"><span class="op">!</span><span class="ot">TRUE</span></a></code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="op">!</span><span class="ot">FALSE</span></a></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="co">#and</span></a>
+<a class="sourceLine" id="cb16-2" data-line-number="2"><span class="ot">TRUE</span> <span class="op">&amp;</span><span class="st"> </span><span class="ot">TRUE</span></a></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="ot">TRUE</span> <span class="op">&amp;</span><span class="st"> </span><span class="ot">FALSE</span></a></code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="co">#or</span></a>
+<a class="sourceLine" id="cb20-2" data-line-number="2"><span class="ot">TRUE</span> <span class="op">|</span><span class="st"> </span><span class="ot">TRUE</span></a></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="ot">TRUE</span> <span class="op">|</span><span class="st"> </span><span class="ot">FALSE</span></a></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1"><span class="co">#idenity</span></a>
+<a class="sourceLine" id="cb24-2" data-line-number="2"><span class="ot">TRUE</span> <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span></a></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1"><span class="ot">FALSE</span> <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span></a></code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1"><span class="ot">FALSE</span> <span class="op">==</span><span class="st"> </span><span class="ot">FALSE</span></a></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<p>They can also behave as numerical values where <code>FALSE</code> evaluates to 0 and <code>TRUE</code> evaluates to 1 or greater then 0.</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1"><span class="ot">TRUE</span> <span class="op">+</span><span class="st"> </span><span class="ot">TRUE</span></a></code></pre></div>
+<pre><code>## [1] 2</code></pre>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1"><span class="ot">FALSE</span> <span class="op">*</span><span class="st"> </span><span class="ot">TRUE</span></a></code></pre></div>
+<pre><code>## [1] 0</code></pre>
+<p>Notice that the <code>class</code> of this changes when you force them to act as numerical values</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1"><span class="kw">class</span>(<span class="ot">TRUE</span>)</a></code></pre></div>
+<pre><code>## [1] &quot;logical&quot;</code></pre>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1"><span class="kw">class</span>(<span class="ot">TRUE</span><span class="op">+</span><span class="ot">TRUE</span>)</a></code></pre></div>
+<pre><code>## [1] &quot;integer&quot;</code></pre>
+</div>
+<div id="numerical-data-types" class="section level3">
+<h3><span class="header-section-number">1.3.2</span> Numerical data types</h3>
+<p>Numerical data types are numbers. These can be whole numbers, also called <code>integers</code>, like <code>1</code> or decimal numbers like <code>2.3</code>. If you’ve worked in other programming languages you might recall that integers and doubles or floats behave very differently, but R treats them all as numerics and will generally like any calculator that you’ve used.</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" data-line-number="1"><span class="co">#addition</span></a>
+<a class="sourceLine" id="cb38-2" data-line-number="2"><span class="dv">1</span><span class="op">+</span><span class="dv">2</span></a></code></pre></div>
+<pre><code>## [1] 3</code></pre>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" data-line-number="1"><span class="co">#multiplication</span></a>
+<a class="sourceLine" id="cb40-2" data-line-number="2"><span class="dv">3</span><span class="op">*</span><span class="dv">4</span></a></code></pre></div>
+<pre><code>## [1] 12</code></pre>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1"><span class="co">#subtraction</span></a>
+<a class="sourceLine" id="cb42-2" data-line-number="2"><span class="dv">5-8</span></a></code></pre></div>
+<pre><code>## [1] -3</code></pre>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" data-line-number="1"><span class="co">#division</span></a>
+<a class="sourceLine" id="cb44-2" data-line-number="2"><span class="dv">5</span><span class="op">/</span><span class="dv">3</span></a></code></pre></div>
+<pre><code>## [1] 1.666667</code></pre>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" data-line-number="1"><span class="co">#exponent</span></a>
+<a class="sourceLine" id="cb46-2" data-line-number="2"><span class="dv">3</span><span class="op">^</span><span class="dv">2</span></a></code></pre></div>
+<pre><code>## [1] 9</code></pre>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" data-line-number="1"><span class="co">#log (base e)</span></a>
+<a class="sourceLine" id="cb48-2" data-line-number="2"><span class="kw">log</span>(<span class="dv">2</span>)</a></code></pre></div>
+<pre><code>## [1] 0.6931472</code></pre>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" data-line-number="1"><span class="co">#e^x</span></a>
+<a class="sourceLine" id="cb50-2" data-line-number="2"><span class="kw">exp</span>(<span class="dv">2</span>)</a></code></pre></div>
+<pre><code>## [1] 7.389056</code></pre>
+</div>
+<div id="characters" class="section level3">
+<h3><span class="header-section-number">1.3.3</span> Characters</h3>
+<p><code>character</code> is the final fundimental data type in R.
+These include both alphanumerics like <code>12ad</code> but also special chactures like <code>$#@_</code>.
+Characters in R are defined using a set of single (’‘) or double quotes (&quot;&quot;).
+Since we think of character as a single letter or digit it can be awkward to talk about sets of characters using the <code>character</code> but R has no such grammer problems.
+Internally R does not care if it is a single letter or a copy of the Declaration of Independence, they are both <code>character</code> data types.
+Us poor humans are left plurizing a set of characters as either ’characters’ or ‘strings’, but this is a reflection on our grammer not how they are represented by R.</p>
+<p>Characters can be pushed together using the function <code>paste</code>.
+R also has a robust regular expression library which can match specified character patterns, sort of like a generalized search function in a text editor.</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" data-line-number="1"><span class="co">#a character example</span></a>
+<a class="sourceLine" id="cb52-2" data-line-number="2"><span class="st">&#39;hi!&#39;</span></a></code></pre></div>
+<pre><code>## [1] &quot;hi!&quot;</code></pre>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" data-line-number="1"><span class="co">#making a single character string</span></a>
+<a class="sourceLine" id="cb54-2" data-line-number="2"><span class="kw">paste</span>(<span class="st">&quot;hello&quot;</span>, <span class="st">&#39;world&#39;</span>)</a></code></pre></div>
+<pre><code>## [1] &quot;hello world&quot;</code></pre>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" data-line-number="1"><span class="co">#subsetting a string</span></a>
+<a class="sourceLine" id="cb56-2" data-line-number="2"><span class="kw">substr</span>(<span class="st">&#39;Hello world!&#39;</span>, <span class="dt">start =</span> <span class="dv">1</span>, <span class="dt">stop =</span> <span class="dv">5</span>)</a></code></pre></div>
+<pre><code>## [1] &quot;Hello&quot;</code></pre>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" data-line-number="1"><span class="co">#cryptic preview of a regular expression</span></a>
+<a class="sourceLine" id="cb58-2" data-line-number="2"><span class="kw">grepl</span>(<span class="st">&#39;</span><span class="ch">\\</span><span class="st">d&#39;</span>, <span class="st">&#39;1231&#39;</span>)</a></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+</div>
+</div>
+<div id="notation" class="section level2">
+<h2><span class="header-section-number">1.4</span> Notation</h2>
+<div id="sect_infix" class="section level3">
+<h3><span class="header-section-number">1.4.1</span> Infix notation</h3>
+</div>
+<div id="postfix-notation" class="section level3">
+<h3><span class="header-section-number">1.4.2</span> Postfix notation</h3>
+</div>
+<div id="prefix-notation" class="section level3">
+<h3><span class="header-section-number">1.4.3</span> Prefix notation</h3>
+</div>
+</div>
+<div id="variables" class="section level2">
+<h2><span class="header-section-number">1.5</span> Variables</h2>
+<p>In addition to using the console like a calcuator we can store the results in variables (similar to objects in other langauges).
+We don’t have to do anything before hand to formally initalize the variable and R has no problem switching data types that are stored in a variable.
+This is called a ‘weakly typed’ language and is generally not considered a good thing because it means sometimes variables are not what you expect them to be.
+But generally, for short analysis, this is not a huge issue for us.</p>
+<p>The assignment operator ‘&lt;-’ is used to assign the value <code>2</code> to the varaible <code>a</code> below.
+Note that R will do this silently without giving you any output to the console window unless it runs into trouble.</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" data-line-number="1">a &lt;-<span class="st"> </span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb60-2" data-line-number="2">a</a></code></pre></div>
+<pre><code>## [1] 2</code></pre>
+<p>When you call a variable like <code>a + 3</code> the variable is not modified unless you explicitly assign the output of that operator back to the variable.
+For example</p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" data-line-number="1">a &lt;-<span class="st"> </span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb62-2" data-line-number="2">a <span class="op">+</span><span class="st"> </span><span class="dv">3</span></a></code></pre></div>
+<pre><code>## [1] 5</code></pre>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" data-line-number="1">a</a></code></pre></div>
+<pre><code>## [1] 2</code></pre>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" data-line-number="1">a &lt;-<span class="st"> </span>a <span class="op">+</span><span class="st"> </span><span class="dv">3</span></a>
+<a class="sourceLine" id="cb66-2" data-line-number="2">a</a></code></pre></div>
+<pre><code>## [1] 5</code></pre>
+<p>Variable names must start with an alphabet character but can contain numbers or <code>_</code>.
+They can not contain other special characters like <code>.*^&amp;!@</code>.
+There are several guideline other about what makes a good variable name and you should read the class style guide to find out what is expected in this class!</p>
+<div id="a-brief-history-of-the-assignment-operator" class="section level3">
+<h3><span class="header-section-number">1.5.1</span> A brief history of the assignment operator</h3>
+<p>Why the funky assigment operator ‘&lt;-’, why not just use ‘=’?</p>
+<p>I’m glad you asked! The answer is mostly historical reasons at this point.
+First programming languages are almost never created from nothing, they are almost all modifications of pervious programming languages.
+R was developed from S which was developed from several languages including APL.
+APL was developed to be used with a very specific keyboard that had a dedicated arrow key to produce ‘&lt;-’.
+So when ‘&lt;-’ was proposed it was no more key strokes then using any other character.</p>
+<p>So why not <code>=</code>?</p>
+<p>Well, <code>=</code> was being used for testing equivalancy in many languages and people didn’t want programmers to get confused between testing if two variables were the same value and assigning on value to another.
+Of course R went and used <code>==</code> for equivalancy, and enough people complained that eventually <code>=</code> was introduced into the lanaguage for assignment later… sort of.
+While <code>=</code> will work to assign values to variables it has some very odd side effects that makes it a questional choice in many <a href="https://renkun.me/2014/01/28/difference-between-assignment-operators-in-r/">cases.</a>
+Instead R typically uses <code>=</code> to assign value to input variables in function calls.</p>
+<p>Which is not confusing at all… no of course it’s confusing!
+What’s important to remember for now is that you should use <code>&lt;-</code> to assign values to variables, <code>=</code> to assing value to function arguments, and be aware that some folks might use <code>=</code> to assign values to variables (but you never would!).
+There are reasons for all of these that has to do with the historical development of R as a programming language that is more detail then we really care about right now.</p>
+</div>
+<div id="factors" class="section level3">
+<h3><span class="header-section-number">1.5.2</span> Factors</h3>
+<p><code>factors</code> are integers disguised as characters and can be a pretty nasty surpirse if you aren’t expecting them.
+Factors represent categorical variables, for example animals can be either ‘reptile’ or ‘mammal’.
+To save memory space, R has <code>factors</code> which assign each category an integer and then will write that integer to memory instead of the character strings.
+Sometimes that means R will treat factors as an integer numeric and sometimes it will treat it as a character.
+Right now you should just be aware that there are these funny things called ‘factors’ and double check that they are doing what you think they are when you use them.</p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" data-line-number="1"><span class="kw">factor</span>(<span class="kw">c</span>(<span class="st">&#39;reptile&#39;</span>, <span class="st">&#39;mammal&#39;</span>, <span class="st">&#39;mammal&#39;</span>, <span class="st">&#39;reptile&#39;</span>), <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&#39;reptile&#39;</span>, <span class="st">&#39;mammal&#39;</span>))</a></code></pre></div>
+<pre><code>## [1] reptile mammal  mammal  reptile
+## Levels: reptile mammal</code></pre>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" data-line-number="1"><span class="kw">factor</span>(<span class="kw">c</span>(<span class="st">&#39;reptile&#39;</span>, <span class="st">&#39;mammal&#39;</span>, <span class="st">&#39;mammal&#39;</span>, <span class="st">&#39;reptile&#39;</span>), <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&#39;mammal&#39;</span>, <span class="st">&#39;reptile&#39;</span>))</a></code></pre></div>
+<pre><code>## [1] reptile mammal  mammal  reptile
+## Levels: mammal reptile</code></pre>
+</div>
+</div>
+<div id="data-structures" class="section level2">
+<h2><span class="header-section-number">1.6</span> Data structures</h2>
+<p>There are two primary data structures in R: <code>arrays</code> and <code>list</code>.
+Lists however are used as the basis for several other data structures that we will commonly use including <code>data.frame</code> and <code>tibble</code></p>
+<div id="arrays" class="section level3">
+<h3><span class="header-section-number">1.6.1</span> Arrays</h3>
+<p>Arrays are ordered groups of the same data type.
+You can think of these as N-dimentional matrices.</p>
+<p>A vector is a special array that has only one dimention.
+Vectors are used all the time in R to construct more complicated data structures.
+You use the <code>c(...)</code> to construct a vector and the <code>:</code> notation to create a vector of sequential numbers.
+In general, any operation you apply to a data type is applied element by element to an array of that data type</p>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb72-1" data-line-number="1">myVector &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb72-2" data-line-number="2">myVector</a></code></pre></div>
+<pre><code>## [1] 1 3 4 1</code></pre>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb74-1" data-line-number="1">myVector <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a></code></pre></div>
+<pre><code>## [1] 2 4 5 2</code></pre>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb76-1" data-line-number="1"><span class="dv">1</span><span class="op">:</span><span class="dv">5</span></a></code></pre></div>
+<pre><code>## [1] 1 2 3 4 5</code></pre>
+<p>To create an array you need to pass the <code>array</code> function the values you are populating the array with and the dimentions of the array. Note that the array is populated by row first and then by column.</p>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb78-1" data-line-number="1"><span class="kw">array</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">7</span>), <span class="dt">dim=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</a></code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]    1    5
+## [2,]    3    7</code></pre>
+</div>
+<div id="lists" class="section level3">
+<h3><span class="header-section-number">1.6.2</span> Lists</h3>
+<p>A list is a named group of data types that do not have to be the same.
+While a list can be unnamed, it is generally a bad idea.
+You can also have a list of lists.
+As a general rule you can not apply operations expecting a specific data type to a list object.
+You can get or set the names of the elemetns of a list using the function <code>names(...)</code>.
+Notice that you use <code>=</code> to assign names to each element of a <code>list</code>.</p>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb80-1" data-line-number="1"><span class="co">#a list of mixed type, including a list of a list</span></a>
+<a class="sourceLine" id="cb80-2" data-line-number="2"><span class="kw">list</span>(<span class="dt">a=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="dt">b=</span><span class="st">&#39;cat&#39;</span>, <span class="dt">d=</span><span class="dv">13</span>, <span class="dt">w=</span><span class="kw">list</span>(<span class="dt">a=</span><span class="st">&#39;dog&#39;</span>, <span class="dt">b=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">1</span>)))</a></code></pre></div>
+<pre><code>## $a
+## [1] 1 2
+## 
+## $b
+## [1] &quot;cat&quot;
+## 
+## $d
+## [1] 13
+## 
+## $w
+## $w$a
+## [1] &quot;dog&quot;
+## 
+## $w$b
+## [1] 2 3 4 1</code></pre>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb82-1" data-line-number="1">data_ls &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">a=</span><span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">b=</span><span class="st">&#39;cat&#39;</span>)</a>
+<a class="sourceLine" id="cb82-2" data-line-number="2">data_ls</a></code></pre></div>
+<pre><code>## $a
+## [1] 1 2 3 4
+## 
+## $b
+## [1] &quot;cat&quot;</code></pre>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb84-1" data-line-number="1"><span class="kw">names</span>(data_ls)</a></code></pre></div>
+<pre><code>## [1] &quot;a&quot; &quot;b&quot;</code></pre>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb86-1" data-line-number="1"><span class="kw">names</span>(data_ls) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;count&#39;</span>, <span class="st">&#39;animal&#39;</span>)</a>
+<a class="sourceLine" id="cb86-2" data-line-number="2">data_ls</a></code></pre></div>
+<pre><code>## $count
+## [1] 1 2 3 4
+## 
+## $animal
+## [1] &quot;cat&quot;</code></pre>
+</div>
+<div id="data.frame" class="section level3">
+<h3><span class="header-section-number">1.6.3</span> data.frame</h3>
+<p>A <code>data.frame</code> is a list where each element is the same length.
+This is very useful in representing data that is in a table form.
+The colums of a <code>data.frame</code> are associated with the names.</p>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb88-1" data-line-number="1">data_df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">count =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">3</span>),</a>
+<a class="sourceLine" id="cb88-2" data-line-number="2">                      <span class="dt">pet =</span> <span class="kw">c</span>(<span class="st">&#39;farret&#39;</span>, <span class="st">&#39;fish&#39;</span>, <span class="st">&#39;bird&#39;</span>, <span class="st">&#39;dog&#39;</span>, <span class="st">&#39;cat&#39;</span>))</a>
+<a class="sourceLine" id="cb88-3" data-line-number="3">data_df</a></code></pre></div>
+<pre><code>##   count    pet
+## 1     1 farret
+## 2     1   fish
+## 3     2   bird
+## 4     2    dog
+## 5     3    cat</code></pre>
+</div>
+</div>
+<div id="indexing" class="section level2">
+<h2><span class="header-section-number">1.7</span> Indexing</h2>
+<p>Accessing specific parts of a data structure is frequently called indexing.</p>
+<div id="named-reference" class="section level3">
+<h3><span class="header-section-number">1.7.1</span> Named reference</h3>
+<p>Lists have names that can be used to access each element.</p>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb90-1" data-line-number="1">data_ls &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">a=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="dt">b=</span><span class="st">&#39;cat&#39;</span>, <span class="dt">d=</span><span class="dv">13</span>, <span class="dt">w=</span><span class="kw">list</span>(<span class="dt">a=</span><span class="st">&#39;dog&#39;</span>, <span class="dt">b=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">1</span>)))</a>
+<a class="sourceLine" id="cb90-2" data-line-number="2">data_ls<span class="op">$</span>a</a></code></pre></div>
+<pre><code>## [1] 1 2</code></pre>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb92-1" data-line-number="1">data_ls<span class="op">$</span>w</a></code></pre></div>
+<pre><code>## $a
+## [1] &quot;dog&quot;
+## 
+## $b
+## [1] 2 3 4 1</code></pre>
+</div>
+<div id="square-breaket-notation" class="section level3">
+<h3><span class="header-section-number">1.7.2</span> Square breaket notation</h3>
+<p>Both lists and arrays can be accessed using a position reference using <code>[]</code>.</p>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb94-1" data-line-number="1">data_ls &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">a=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="dt">b=</span><span class="st">&#39;cat&#39;</span>, <span class="dt">d=</span><span class="dv">13</span>, <span class="dt">w=</span><span class="kw">list</span>(<span class="dt">a=</span><span class="st">&#39;dog&#39;</span>, <span class="dt">b=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">1</span>)))</a>
+<a class="sourceLine" id="cb94-2" data-line-number="2">data_ls[<span class="dv">1</span>]</a></code></pre></div>
+<pre><code>## $a
+## [1] 1 2</code></pre>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb96-1" data-line-number="1">data_ls[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>]</a></code></pre></div>
+<pre><code>## $b
+## [1] &quot;cat&quot;
+## 
+## $d
+## [1] 13</code></pre>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb98-1" data-line-number="1">myArray &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">7</span>), <span class="dt">dim=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb98-2" data-line-number="2">myArray[<span class="dv">3</span>]</a></code></pre></div>
+<pre><code>## [1] 5</code></pre>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb100-1" data-line-number="1">myArray[<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">4</span>)]</a></code></pre></div>
+<pre><code>## [1] 1 7</code></pre>
+<p>A list can be further simplified using <code>[[]]</code>.
+It is considered simplified because it will strip away the outside list.
+Unline for the <code>[]</code> option, it often doesn’t make much sense to use the <code>[[]]</code> with more then one index.</p>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb102-1" data-line-number="1">data_ls &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">a=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="dt">b=</span><span class="st">&#39;cat&#39;</span>, <span class="dt">d=</span><span class="dv">13</span>, <span class="dt">w=</span><span class="kw">list</span>(<span class="dt">a=</span><span class="st">&#39;dog&#39;</span>, <span class="dt">b=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">1</span>)))</a>
+<a class="sourceLine" id="cb102-2" data-line-number="2">data_ls[[<span class="dv">1</span>]]</a></code></pre></div>
+<pre><code>## [1] 1 2</code></pre>
+<p>Finally multiple demention arrays can also be accessed using a <code>[,...]</code> notation. Keep in mind that R is a row first reference.
+You can leave one of the sides of the <code>,</code> blank in this usage of the square breaket notation to access all the entries in that dimention.</p>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb104-1" data-line-number="1">myArray &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">7</span>), <span class="dt">dim=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb104-2" data-line-number="2">myArray</a></code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]    1    5
+## [2,]    3    7</code></pre>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb106-1" data-line-number="1"><span class="co">#pull the second row, first column.</span></a>
+<a class="sourceLine" id="cb106-2" data-line-number="2">myArray[<span class="dv">2</span>,<span class="dv">1</span>]</a></code></pre></div>
+<pre><code>## [1] 3</code></pre>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb108-1" data-line-number="1"><span class="co">#pull all the rows in column 1</span></a>
+<a class="sourceLine" id="cb108-2" data-line-number="2">myArray[,<span class="dv">1</span>]</a></code></pre></div>
+<pre><code>## [1] 1 3</code></pre>
+</div>
+</div>
+<div id="functions" class="section level2">
+<h2><span class="header-section-number">1.8</span> Functions</h2>
+<p>Functions are a collection of commands with an input and an output.
+Anytime you find yourself copying code multiple times, that’s a pretty good indication that it should be in a function.</p>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb110-1" data-line-number="1"><span class="co">#create a funciton</span></a>
+<a class="sourceLine" id="cb110-2" data-line-number="2">myFunction &lt;-<span class="st"> </span><span class="cf">function</span>(whom){</a>
+<a class="sourceLine" id="cb110-3" data-line-number="3">  ans &lt;-<span class="st"> </span><span class="kw">paste</span>(<span class="st">&#39;Hello&#39;</span>, whom) <span class="co">#create a new variable using the input whome</span></a>
+<a class="sourceLine" id="cb110-4" data-line-number="4">  <span class="kw">return</span>(ans) <span class="co">#return the new variable as the output of the function</span></a>
+<a class="sourceLine" id="cb110-5" data-line-number="5">}</a>
+<a class="sourceLine" id="cb110-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb110-7" data-line-number="7"><span class="co">#call a function</span></a>
+<a class="sourceLine" id="cb110-8" data-line-number="8"><span class="kw">myFunction</span>(<span class="dt">whom =</span> <span class="st">&#39;world&#39;</span>)</a></code></pre></div>
+<pre><code>## [1] &quot;Hello world&quot;</code></pre>
+<p>There are four main parts of a function declaration: name, inputs, body, and output.
+Let’s consider the above function <code>myFunction</code>.</p>
+<p>We start by assigning a varaiable named <code>myFunction</code>, just like assigning a basic data type or data structure you use the assign operator.
+A function is considered a basic data type by R, which makes it a funcitonal programing language (as opposed to object-oriented programming languages where functions are associated with more complicated ‘objects’).</p>
+<p>Next you call the function <code>function</code> and specify the inputs to your new function.
+These inputs are essencially promisses.
+You are promissing that you will provide a variable that the function can refer to on execution when you call it.</p>
+<p>Then you define the body of the function by enclosing lines of code with a set of curly brackets <code>{...}</code>.
+Generally, but not always, the code in the body takes the input promised to the function and does something with it, in this example it adds the word ‘Hello’ to the start.</p>
+<p>Finally, you give the caller of the function the output using the <code>return</code> function.
+If you don’t specify what a function should return, R will try to guess.
+This can lead to unexpected behavior so you should specify what your function returns, in this example it’s the variable that we created called <code>ans</code>.</p>
+<p>After you have created a function you can now call it using the function name, followed by an open paren <code>(</code>, assigned input values using the <code>=</code>, and then a close paren <code>)</code>.</p>
+<div id="developing-a-function" class="section level3">
+<h3><span class="header-section-number">1.8.1</span> Developing a function</h3>
+<p>When you are first developing a function it often makes sense to comment out everything but the body of a function and explicitly define an example input.
+Below there are two examples of the development version and the final version of the same function.
+Be sure to comment out your development case!
+Otherwise you’ll re-assign the input variable to a ‘hard coded’ value every single time you call the function, something that you almost never want to do!</p>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb112-1" data-line-number="1"><span class="co">####Development phase</span></a>
+<a class="sourceLine" id="cb112-2" data-line-number="2"><span class="co">#calcClassGrade &lt;- function(grades_arr){</span></a>
+<a class="sourceLine" id="cb112-3" data-line-number="3">  grades_arr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">50</span>, <span class="dv">23</span>, <span class="dv">90</span>, <span class="dv">98</span>, <span class="dv">85</span>)</a>
+<a class="sourceLine" id="cb112-4" data-line-number="4">  <span class="co">#the final grade is the mean of grades less then the min (ie drop the lowest grade)</span></a>
+<a class="sourceLine" id="cb112-5" data-line-number="5">  ans &lt;-<span class="st"> </span><span class="kw">mean</span>(grades_arr[grades_arr <span class="op">&gt;</span><span class="st"> </span><span class="kw">min</span>(grades_arr)]) </a>
+<a class="sourceLine" id="cb112-6" data-line-number="6">  <span class="co">#ans should be 80.75 for the test case</span></a>
+<a class="sourceLine" id="cb112-7" data-line-number="7"><span class="co">#  return(ans)</span></a>
+<a class="sourceLine" id="cb112-8" data-line-number="8"><span class="co">#}</span></a>
+<a class="sourceLine" id="cb112-9" data-line-number="9">  </a>
+<a class="sourceLine" id="cb112-10" data-line-number="10"><span class="co">####Final phase</span></a>
+<a class="sourceLine" id="cb112-11" data-line-number="11">calcClassGrade &lt;-<span class="st"> </span><span class="cf">function</span>(grades_arr){</a>
+<a class="sourceLine" id="cb112-12" data-line-number="12">  <span class="co">#grades_arr &lt;- c(50, 23, 90, 98, 85)</span></a>
+<a class="sourceLine" id="cb112-13" data-line-number="13">  <span class="co">#the final grade is the mean of grades less then the min (ie drop the lowest grade)</span></a>
+<a class="sourceLine" id="cb112-14" data-line-number="14">  ans &lt;-<span class="st"> </span><span class="kw">mean</span>(grades_arr[grades_arr <span class="op">&gt;</span><span class="st"> </span><span class="kw">min</span>(grades_arr)]) </a>
+<a class="sourceLine" id="cb112-15" data-line-number="15">  <span class="co">#ans should be 80.75 for the test case</span></a>
+<a class="sourceLine" id="cb112-16" data-line-number="16">  <span class="kw">return</span>(ans)</a>
+<a class="sourceLine" id="cb112-17" data-line-number="17">}</a></code></pre></div>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="r-and-rstudio-set-up.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="style-guide.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
