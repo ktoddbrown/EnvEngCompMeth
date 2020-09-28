@@ -19,8 +19,13 @@ Historically computational methods has focused on algorithms to solve numerical 
 We will do some of this over the course of the semester but in practice many of you will never actually need to write a forward-difference solver, instead relying on libraries and packages that are already developed.
 This historically approach also ignores the new developments in data analysis workflows that have relatively recently come into common practice.
 
-```{r setup}
-library(tidyverse) # clean up data and plot stuff in 04_tidyverse.Rmd
-library(DiagrammeR) #draw box and flow diagrams in 10_models.Rmd
-library(deSolve) #ODE solver for numerical models
-```
+## Other references
+
+There are lots of excellent references on R and other topics we'll be covering this semester but some that you might want to pay special attention to are:
+
+  + Venables, WN, DM Smith, and the R Core Team, **An Introduction to R**, [R, version 4.0.2 (2020-06-22)],  https://cran.r-project.org/doc/manuals/r-release/R-intro.pdf
+    - Intro to R is a short classic that is updated with each major release of R. Want the basics in a short format? Go here.
+  + Michonneau, F, A Fournier, and others, **Data Carpentry: Data Analysis and Visualization in R for Ecologists**, https://datacarpentry.org/R-ecology-lesson/
+    - Lesson plans for the data carpentry R workshop are an excellent on-ramp to learning R. We'll be going back and forth in these lessons over the semester. These can be an excellent refresher or a way to peak head.
+  + Hadley Wickham, **Advanced R**, 2nd edition (2019). https://adv-r.hadley.nz/ (ISBN-13: 978-0815384571)
+    - Advanced R is the go to book when you want to go deeper. If you want to know why something is the way it is in R this book probably has the answer, but it's not always beginner friendly.

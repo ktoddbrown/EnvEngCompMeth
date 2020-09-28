@@ -1,4 +1,4 @@
-# R and RStudio set up {-}
+# R and RStudio set up
 
 R and RStudio are separate downloads and installations. 
 R is the underlying statistical computing environment, but using R alone is no fun. 
@@ -32,3 +32,14 @@ These instructions are adaptation from [Setup for R workshops - Ecology Workshop
 - Go to the [RStudio download page](https://www.rstudio.com/products/rstudio/download/#download)
 - Under Installers select the version that matches your distribution, and install it with your preferred method (e.g., with Debian/Ubuntu sudo dpkg -i rstudio-x.yy.zzz-amd64.deb at the terminal).
 - Once it’s installed, open RStudio to make sure it works and you don’t get any error messages.
+
+## R libraries
+
+After you install RStudio we will be working with a number of libraries this semester but the two we will focus on are `tidyverse` and `deSolve`.
+
+```{r message=FALSE, warning=FALSE}
+#install.packages(c('tidyverse', 'deSolve'), dependencies = TRUE) #install these libraries
+library(tidyverse) # clean up data and plot stuff
+library(deSolve) #ODE solver for numerical models
+```
+
