@@ -324,10 +324,12 @@ This can lead to unexpected behavior so you should specify what your function re
 After you have created a function you can now call it using the function name, followed by an open paren `(`, assigned input values using the `=`, and then a close paren `)`.
 
 ### Developing a function
+
 When you are first developing a function it often makes sense to comment out everything but the body of a function and explicitly define an example input. 
 Below there are two examples of the development version and the final version of the same function.
 Be sure to comment out your development case!
 Otherwise you'll re-assign the input variable to a 'hard coded' value every single time you call the function, something that you almost never want to do!
+
 ```{r}
 ####Development phase
 #calcClassGrade <- function(grades_arr){
@@ -346,5 +348,42 @@ calcClassGrade <- function(grades_arr){
   #ans should be 80.75 for the test case
   return(ans)
 }
+```
+
+### Documenting a function
+
+Documentation is your friend as a new programmer.
+When you get more experience you can be more sparce with your documentation but early in your career documenting your code will not only demonstrate to your professor that you know what and why you are writing your code, it will also remind your future self what/why a certain section of code was writen.
+We've covered inline commenting with `#` let's talk a little about function documentation using the `roxygen2` package.
+
+Those useful help files that pop up in the help window of Rstudio are most of the time generated using `roxygen2`.
+These skeltons have a very specific format that will be used to fill in the different sections of one of the default manual pages.
+This skelton is off-set using the `#'` in the first column of each row. 
+Repeating yourself in documentation is generally considered a good thing because people generally skim read and so having multiple places for your reader to trip over the answer to their question is good.
+
+  + The first line is the title of the function and always followed by an empty line.
+  + The next paragraph is a longer description of the function.
+This longer description should talk about what the function does and any particular algorithms that were used.
+  + Any parameters pass to the function as inputs are flagged using `@param` followed by the parameter name and a description.
+Parameter descriptions should say what type is expected of that parameter and how that parameter is used in the function.
+  + A return flag `@return` should describe what is returned by the function.
+  
+There are a number of other optional flags but those are the core structure. 
+See below for a simple example
+
+```{r}
+
+#' Add one to something 
+#'
+#' This function takes a variable and returns that value plus one.
+#'
+#' @param myNumber a numeric value that we are going to add one to
+#'
+#' @return return a number that is one greater then the input argument
+addOne <- function(myNumber){
+  return(myNumber + 1)
+  
+}
+
 ```
 
