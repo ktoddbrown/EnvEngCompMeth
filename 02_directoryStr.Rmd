@@ -23,12 +23,20 @@ If your files don't look like this that's ok. How you organize your computer is 
 Directories like `Downloads` or `Temp` are designed for temporary storage and should not be a permanent home for your files.
 Especially with `Temp` directories, your operating sytem or other programs on your computer could delete the files in these diretories to free up space!
 
+## Rproject files
+
 For this class each assignment should be in it's own folder.
-This assignment folder should be zip-ed and submitted as a single upload to the course website.
+RStudio is set up to help you with this by with it's 'Project' organization/feature.
+You can look at how to create a new project in Rstudio here: [Using Projects, RStudio support](https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects).
+A *.Rproj file is created with each new project in the project directory.
+Projects not only help keep you organized they also make sure that your working directory is set to the folder you are working in.
+Let's talk about the organization first.
+
 You should point a new Rproject session to that folder to ensure that the working directory of your Rmarkdown documents matches that of your Console.
 Each assignment folder should have two daughter folders: `R/` and `data/`. All `*.R` files should go in the `R/` folder and all data files (typically `*.csv`) should go in the `data/` file.
 Each assignment should have a single primary Rmarkdown document that should be located at the top level of the assignment folder as well as it's knit-ed html.
 
+This assignment folder should be zip-ed and submitted as a single upload to the course website.
 For example, homework 1's folder might look something like this:
 ```
 Homework01
@@ -41,3 +49,18 @@ Homework01
 |-R
   |-helloWorld.R
 ```
+
+## Working directory and relative vs absolute filenames
+
+Projects in Rstudio also set your working directory.
+When you are reading/writing files you can specify where that file is relative to your working directory.
+This is called a 'relative path'.
+For example, if we are in the `Homework01` project above and we wanted to identify the `exampleData01.csv` file we could use `data/exampleData01.csv` because our working directory is `Homework01`.
+
+There is another way to identify a file using the 'absolute path'.
+An absolute path is the address of your file relative to your root directory.
+On a Windows machine this might look something like this `C:\User\me\Documents\Homework01\data\exampleData01.csv` or on a Mac it might look like `/Users/me/Documents/Homework01/data/exampleData01.csv`.
+You'll notice that Windows and Macs use different slashes for their file names.
+Mostly you can ignore this (R is clever enough to sort it out most of the time), but this is a good thing to be aware of in general.
+Using the funtion `file.path('data', 'exampleData01.csv')` will ensure that your file name is constructed according to the operating system you are on if you ever need it.
+
